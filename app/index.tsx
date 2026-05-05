@@ -1,15 +1,34 @@
 import Header from "@/layout/Header";
 import {COLORS} from "@/constants/ui";
 import { Text, View, StatusBar, StyleSheet } from "react-native";
+import { useState } from "react";
+import { Todo } from "@/types/todo";
+import TodoList from "@/layout/TodoList";
+
+const defaultTodos: Todo[] = [
+  {
+    id: 1,
+    title: "Learn React Native",
+    isCompleted: false
+  },
+  {
+    id: 2,
+    title: "Build a Todo App",
+    isCompleted: false
+  }
+];
+
+const completedTodos = defaultTodos.filter((t) => t.isCompleted).length;
 
 export default function Index() {
+  const [todos, setTodos] = useState<Todo[]>(defaultTodos);
   return (
     <View
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"}></StatusBar>
-      <Header />  
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Header totalTodos={todos.length} completedTodos={completedTodos} />  
+      <TodoList todos={todos} />
     </View>
   );
 }
