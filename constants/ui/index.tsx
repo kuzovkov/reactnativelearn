@@ -3,6 +3,7 @@ export const COLORS = {
   PRIMARY_TEXT: "#ffffff",
   SECONDARY_BACKGROUND: "#1A1A1A",
   TERTIARY_BACKGROUND: "#dddddd",
+  PRIMARY_ACTIVE_BUTTON: "#007AFF",
 
 
 };

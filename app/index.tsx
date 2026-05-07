@@ -15,7 +15,12 @@ const defaultTodos: Todo[] = [
     id: 2,
     title: "Build a Todo App",
     isCompleted: false
-  }
+  },
+  { 
+    id: 3,
+    title: "Write a blog post about React Native",
+    isCompleted: true
+  },
 ];
 
 const completedTodos = defaultTodos.filter((t) => t.isCompleted).length;
