@@ -4,6 +4,7 @@ import { Text, View, StatusBar, StyleSheet } from "react-native";
 import { useState } from "react";
 import { Todo } from "@/types/todo";
 import TodoList from "@/layout/TodoList";
+import TodoCreator from "@/layout/TodoCreator";
 
 const defaultTodos: Todo[] = [
   {
@@ -32,7 +33,11 @@ export default function Index() {
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"}></StatusBar>
+      
       <Header totalTodos={todos.length} completedTodos={completedTodos} />  
+      <TodoCreator onAddTodo={() => {
+         
+      }} />
       <TodoList todos={todos} />
     </View>
   );
