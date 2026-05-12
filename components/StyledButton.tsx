@@ -16,14 +16,24 @@ type StyledButtonProps = TouchableOpacityProps & {
   variant?: "primary" | "delete";
 }
 
-const StyledButton: React.FC<StyledButtonProps> = ({label, icon, size='default', variant='primary', ...props}) => {
+const StyledButton: React.FC<StyledButtonProps> = ({
+  label, 
+  icon, 
+  size='default', 
+  variant='primary',
+  disabled,
+   ...props
+  }) => {
   return (
     <TouchableOpacity 
       style={[styles.base, 
-        size === 'small' && styles.small, size === 'large' && styles.large,
+        disabled? styles.disabled : null,
+        size === 'small' && styles.small, 
+        size === 'large' && styles.large,
         variant === 'primary' && styles.variantPrimary,
         variant === 'delete' && styles.variantDelete
       ]} {...props}
+      disabled={disabled}
     >
       {label && <StyledText>{label}</StyledText>}
       {icon && <Ionicons name={icon} size={20} color={COLORS.PRIMARY_TEXT} />}
@@ -46,8 +56,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   large: {
-    paddingVertical: 16,
-    paddingHorizontal: 24,
+    paddingVertical: 30,
+    paddingHorizontal: 12,
   },
   variantPrimary: {
     backgroundColor: COLORS.PRIMARY_ACTIVE_BUTTON,
@@ -55,6 +65,9 @@ const styles = StyleSheet.create({
   variantDelete: {
     backgroundColor: COLORS.PRIMARY_RED,
   },
+  disabled: {
+    opacity: 0.5, 
+  }
 });
 
 export default StyledButton;

@@ -7,12 +7,36 @@ import StyledText from "@/components/StyledText";
 import StyledTextInput from "@/components/StyledTextInput";
 import StyledButton from "@/components/StyledButton";
 import { COLORS } from "@/constants/ui";
+import React, { useEffect } from "react";
 
 const TodoCreator: React.FC<{onAddTodo: (title: string) => void}> = ({onAddTodo}) => {
+  const [text, setText] = React.useState("");
+  const [inputError, setInputError] = React.useState("");
+
+  const onPressAdd = () => {
+    if (!text.trim()) {
+      setInputError("Todo title is required");
+      return;
+    }
+    onAddTodo(text.trim());
+    setText("");
+    setInputError("");
+  };
+
+  useEffect(() => {
+    if (inputError && text.trim()) {
+      setInputError("");
+    }
+  }, [text]);
+  
   return (
     <View style={styles.container}>
-      <StyledTextInput placeholder="Enter todo title" />
-      <StyledButton label="+" onPress={() => console.log("pressed")} />
+      <StyledTextInput placeholder="Enter todo title"
+       value={text}
+       onChangeText={setText} 
+       isError={!!inputError}
+       />
+      <StyledButton label="+" onPress={onPressAdd} disabled={!!inputError} />
     </View>
   );
 }
