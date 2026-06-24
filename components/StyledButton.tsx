@@ -35,7 +35,19 @@ const StyledButton: React.FC<StyledButtonProps> = ({
       ]} {...props}
       disabled={disabled}
     >
-      {label && <StyledText>{label}</StyledText>}
+      {label && 
+      <StyledText
+        variant={(()=>{
+          switch(size) {
+            case "small":
+              return "small";
+            case "large":
+              return "heading";
+            default:
+              return "primary";
+          }
+        })()}
+      >{label}</StyledText>}
       {icon && <Ionicons name={icon} size={20} color={COLORS.PRIMARY_TEXT} />}
     </TouchableOpacity>
   );
@@ -56,8 +68,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   large: {
-    paddingVertical: 30,
-    paddingHorizontal: 12,
+    paddingVertical: 20,
+    paddingHorizontal: 22,
   },
   variantPrimary: {
     backgroundColor: COLORS.PRIMARY_ACTIVE_BUTTON,

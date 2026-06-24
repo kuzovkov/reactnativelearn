@@ -3,24 +3,33 @@ import StyledCheckbox from "@/components/StyledCheckbox";
 import StyledText from "@/components/StyledText";
 import { COLORS } from "@/constants/ui";
 import { View, StyleSheet } from "react-native";
+import { Todo } from "@/types/todo";
+import EditTodoModal from "@/layout/Modals/EditTodoModal";
+import { useState } from "react";
+import DeleteTodoModal from "@/layout/Modals/DeleteTodoModal";
 
-type todoItemProps = {
-  id: number;
-  title: string;
-  isCompleted: boolean;
+type todoItemProps = Todo & {
+  onPressDelete: (id: number) => void;
+  onToggleComplete: (id: number) => void;
+  onUpdateTodo: (id: number, title: string) => void;
 }
 
-const TodoItem = ({id, title, isCompleted}: todoItemProps) => {
+const TodoItem = ({id, title, isCompleted, onPressDelete, onToggleComplete, onUpdateTodo}: todoItemProps) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  
   return (
     <View style={isCompleted ? styles.completedContainer : styles.container}>
       <View style={styles.checkTitleContainer}>
-        <StyledCheckbox checked={isCompleted} onChange={() => console.log("pressed")} />
+        <StyledCheckbox checked={isCompleted} onChange={() => onToggleComplete(id)} />
         <StyledText style={isCompleted ? styles.completedText : undefined}>{title}</StyledText>  
       </View>
      
       <View style={styles.controlsContailer}>
-        <StyledButton icon="pencil" size="small" onPress={() => console.log("pressed")}/>
-        <StyledButton icon="trash" size="small" variant="delete" onPress={() => console.log("pressed")}/>
+        <StyledButton icon="pencil" size="small" onPress={() => setIsEditModalOpen(true)}/>
+        <EditTodoModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onUpdate={onUpdateTodo} title={title} id={id}/>
+        <StyledButton icon="trash" size="small" variant="delete" onPress={() => setIsDeleteModalOpen(true)}/>
+        <DeleteTodoModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDeleteTodo={() => onPressDelete(id)} id={id} title={title}/>
       </View>
       
     </View>

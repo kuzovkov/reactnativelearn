@@ -36,7 +36,7 @@ const TodoCreator: React.FC<{onAddTodo: (title: string) => void}> = ({onAddTodo}
        onChangeText={setText} 
        isError={!!inputError}
        />
-      <StyledButton label="+" onPress={onPressAdd} disabled={!!inputError} />
+      <StyledButton size="large" label="+" onPress={onPressAdd} disabled={!!inputError} />
     </View>
   );
 }

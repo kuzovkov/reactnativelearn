@@ -12,9 +12,11 @@ type headerProps = {
 const Header:React.FC<headerProps> = ({totalTodos, completedTodos}: headerProps) => {
   return (
     <View style={styles.container}>
-      <StyledText style={styles.headerMainContent}>Header</StyledText>
-      <StyledText>{new Date().toLocaleString()}</StyledText>
-      <StyledText>Completed: {completedTodos} / {totalTodos}</StyledText>
+      <StyledText variant="title" style={styles.headerMainContent}>
+        Header
+      </StyledText>
+      <StyledText variant="subtitle">{new Date().toLocaleString()}</StyledText>
+      <StyledText variant="small">Completed: {completedTodos} / {totalTodos}</StyledText>
     </View>
   )
 }
