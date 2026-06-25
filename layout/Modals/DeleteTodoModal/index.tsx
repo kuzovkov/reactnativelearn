@@ -1,5 +1,5 @@
 import { COLORS } from "@/constants/ui";
-import { Modal, TouchableWithoutFeedback, View } from "react-native";
+import { Modal, TouchableWithoutFeedback, Vibration, View } from "react-native";
 import {StyleSheet} from "react-native";
 import {Todo} from "@/types/todo";
 import StyledModal from "@/components/StyledModal";
@@ -21,6 +21,7 @@ const DeleteTodoModal: React.FC<DeleteTodoModalProps> = ({isOpen, onClose, id, t
 
 const handleDelete = () => {
   onDeleteTodo(id);
+  Vibration.vibrate(100);
   onClose();
 };
 

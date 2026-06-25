@@ -2,7 +2,7 @@ type TodoCreatorProps = {
   onAddTodo: (title: string) => void;
 }
 
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Keyboard } from "react-native";
 import StyledText from "@/components/StyledText";
 import StyledTextInput from "@/components/StyledTextInput";
 import StyledButton from "@/components/StyledButton";
@@ -18,6 +18,7 @@ const TodoCreator: React.FC<{onAddTodo: (title: string) => void}> = ({onAddTodo}
       setInputError("Todo title is required");
       return;
     }
+    Keyboard.dismiss();
     onAddTodo(text.trim());
     setText("");
     setInputError("");
